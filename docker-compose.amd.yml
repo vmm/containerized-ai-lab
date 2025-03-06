@@ -1,0 +1,45 @@
+services:
+  ollama:
+    image: ollama/ollama:latest
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+      - /dev/kfd:/dev/kfd
+      - /dev/dri:/dev/dri
+    deploy:
+      resources:
+        reservations:
+          memory: 16G
+        limits:
+          memory: 24G
+    # GPU support for AMD ROCm
+    group_add:
+      - video
+      - 992  # render group ID
+    environment:
+      - HSA_OVERRIDE_GFX_VERSION=10.3.0
+
+  ai-lab:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app:/app/app
+      - ./tools:/app/tools
+      - ./models:/app/models
+    environment:
+      - OLLAMA_HOST=http://ollama:11434
+      - MODEL_NAME=llama2
+      - FALLBACK_MODEL=phi
+    deploy:
+      resources:
+        reservations:
+          memory: 2G
+        limits:
+          memory: 4G
+    depends_on:
+      - ollama
+
+volumes:
+  ollama_data:
