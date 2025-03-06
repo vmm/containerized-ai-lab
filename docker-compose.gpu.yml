@@ -1,0 +1,46 @@
+services:
+  ollama:
+    image: ollama/ollama:latest
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    deploy:
+      resources:
+        reservations:
+          memory: 16G
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+        limits:
+          memory: 24G
+    # GPU support for Ubuntu with NVIDIA
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+
+  ai-lab:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app:/app/app
+      - ./tools:/app/tools
+      - ./models:/app/models
+    environment:
+      - OLLAMA_HOST=http://ollama:11434
+      - MODEL_NAME=llama2
+      - FALLBACK_MODEL=phi
+    deploy:
+      resources:
+        reservations:
+          memory: 2G
+        limits:
+          memory: 4G
+    depends_on:
+      - ollama
+
+volumes:
+  ollama_data:

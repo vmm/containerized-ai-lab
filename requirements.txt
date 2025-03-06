@@ -1,0 +1,15 @@
+# Core packages with relaxed constraints
+langchain>=0.3.0,<0.4.0
+langchain-core>=0.2.20,<0.4.0
+langchain-community>=0.3.0,<0.4.0
+langchain-ollama>=0.0.1
+pydantic>=2.7.4,<3.0.0
+
+# Web framework
+fastapi>=0.95.0,<0.113.0
+uvicorn>=0.22.0,<0.31.0
+httpx>=0.24.0,<0.28.0
+
+# Utilities
+python-dotenv>=1.0.0,<2.0.0
+jinja2>=3.1.2,<3.2.0

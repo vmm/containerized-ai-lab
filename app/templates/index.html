@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Containerized AI Lab</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .container {
+            margin-top: 30px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Containerized AI Lab</h1>
+    
+    <div class="container">
+        <div class="card">
+            <h2>Chat with AI Agent</h2>
+            <p>Interact with a LangChain agent powered by a local LLM through Ollama.</p>
+            <a href="/static/index.html" class="button">Open Chat</a>
+        </div>
+        
+        <div class="card">
+            <h2>API Documentation</h2>
+            <p>View the FastAPI documentation to understand available endpoints.</p>
+            <a href="/docs" class="button">View API Docs</a>
+        </div>
+        
+        <div class="card">
+            <h2>Available Models</h2>
+            <p>Check which models are available through Ollama.</p>
+            <a href="/models" class="button">List Models</a>
+        </div>
+    </div>
+</body>
+</html>

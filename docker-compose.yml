@@ -1,0 +1,42 @@
+services:
+  ollama:
+    image: ollama/ollama:latest
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    deploy:
+      resources:
+        reservations:
+          memory: 12G
+        limits:
+          memory: 16G
+    # GPU support - uncomment these lines on your Ubuntu machine
+    # runtime: nvidia
+    # environment:
+    #  - NVIDIA_VISIBLE_DEVICES=all
+    #  - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+
+  ai-lab:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app:/app/app
+      - ./tools:/app/tools
+      - ./models:/app/models
+    environment:
+      - OLLAMA_HOST=http://ollama:11434
+      - MODEL_NAME=llama2
+      - FALLBACK_MODEL=phi
+    deploy:
+      resources:
+        reservations:
+          memory: 1G
+        limits:
+          memory: 2G
+    depends_on:
+      - ollama
+
+volumes:
+  ollama_data:
