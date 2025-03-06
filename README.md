@@ -1,6 +1,28 @@
 # Containerized AI Lab
 
+[![GitHub License](https://img.shields.io/github/license/vmm/containerized-ai-lab)](https://github.com/vmm/containerized-ai-lab/blob/main/LICENSE)
+
 A containerized environment for experimenting with local LLMs and LangChain agents.
+
+## Quick Start
+
+```bash
+# Clone the repository
+git clone https://github.com/vmm/containerized-ai-lab.git
+cd containerized-ai-lab
+
+# Make the management script executable
+chmod +x manage.sh
+
+# Start the containers (for macOS/Linux)
+./manage.sh start
+
+# Or with GPU support on Linux/NVIDIA
+./manage.sh start-gpu
+
+# Access the web interface
+open http://localhost:8000
+```
 
 ## Features
 
